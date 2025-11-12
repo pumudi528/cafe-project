@@ -96,3 +96,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Description 01
+
+Wed 12 Nov 5:21 PM – So far, I have installed Node.js and NestJS CLI, and set up the initial NestJS project (`cafe`).  
+The server runs locally on **port 3000** by default. I tested the API using **Postman** and confirmed the default route (`GET /`) works.  
+I also modified the default message returned by the root route to display a custom message instead of the original "Hello World!".
+
+
+
