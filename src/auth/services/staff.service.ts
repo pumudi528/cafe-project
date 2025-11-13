@@ -7,7 +7,7 @@ import { LoginStaffDto } from '../dto/login-staff.dto';
 @Injectable()
 export class StaffService {
   private readonly staffEmail = 'admin@example.com';
-  private readonly staffPassword = '$2b$10$Q57ZZhzjUHPOFxMv32ARbu6eOIr1rNUJrzSibsIH8qJ0DWS7Mn5wu';
+  private readonly staffPassword = '$2b$10$67API36OSSMsd9OFX0BFJeAtH.XbWBt5DioycaoODi2TEhc7hOT4m';
 
   constructor(private readonly jwtService: JwtService) {}  // ✅ important: private readonly
 
