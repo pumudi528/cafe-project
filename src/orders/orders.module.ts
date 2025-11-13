@@ -1,3 +1,4 @@
+// src/orders/orders.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OrdersService } from './orders.service';
@@ -7,12 +8,11 @@ import { Menu, MenuSchema } from '../menu/schemas/menu.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Order.name, schema: OrderSchema },
-      { name: Menu.name, schema: MenuSchema },
-    ]),
+    MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]),
+    MongooseModule.forFeature([{ name: Menu.name, schema: MenuSchema }]),
   ],
-  providers: [OrdersService],
   controllers: [OrdersController],
+  providers: [OrdersService],
+  exports: [OrdersService],
 })
 export class OrdersModule {}

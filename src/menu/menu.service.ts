@@ -65,5 +65,11 @@ export class MenuService {
   return { message: 'Menu item deleted successfully' };
 }
 
+
+// Fetch only available menu items
+async getAvailableMenu(): Promise<Menu[]> {
+  return this.menuModel.find({ isAvailable: true }).exec();
+}
+
 }
 

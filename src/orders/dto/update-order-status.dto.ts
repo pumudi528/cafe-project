@@ -1,9 +1,21 @@
-import { IsString, IsIn } from 'class-validator';
+// src/orders/dto/update-order-status.dto.ts
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum, IsNotEmpty } from 'class-validator';
+
+export enum OrderStatus {
+  PLACED = 'Placed',
+  PREPARING = 'Preparing',
+  READY = 'Ready',
+  PICKED_UP = 'PickedUp',
+  CANCELLED = 'Cancelled',
+  ABANDONED = 'Abandoned',
+}
 
 export class UpdateOrderStatusDto {
-  @IsString()
-  @IsIn(['Placed', 'Preparing', 'Ready', 'PickedUp', 'Cancelled', 'Abandoned'])
-  status: 'Placed' | 'Preparing' | 'Ready' | 'PickedUp' | 'Cancelled' | 'Abandoned';
+  @ApiProperty({ description: 'New status of the order', enum: OrderStatus })
+  @IsEnum(OrderStatus)
+  @IsNotEmpty()
+  status: OrderStatus;
 }
 
 
