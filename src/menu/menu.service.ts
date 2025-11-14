@@ -9,7 +9,7 @@ import { UpdateMenuDto } from './dto/update-menu.dto';
 export class MenuService {
   constructor(@InjectModel(Menu.name) private menuModel: Model<MenuDocument>) {}
 
-  // Create or update menu item
+ 
   async createOrUpdate(createMenuDto: CreateMenuDto): Promise<Menu> {
     if (createMenuDto.stock !== undefined && createMenuDto.stock < 0)
       throw new BadRequestException('Stock must be positive');
@@ -24,7 +24,7 @@ export class MenuService {
     return menu.save();
   }
 
-  // List menu items, optional lowStock filter
+
   async findAll(lowStock?: number): Promise<Menu[]> {
     if (lowStock !== undefined) {
       return this.menuModel.find({ stock: { $lte: lowStock } }).exec();
@@ -39,7 +39,7 @@ export class MenuService {
   }
 
   async update(id: string, updateMenuDto: UpdateMenuDto) {
-  // Validate stock is positive if provided
+
   if (updateMenuDto.stock !== undefined && updateMenuDto.stock < 0) {
     throw new BadRequestException('Stock must be positive');
   }
@@ -66,7 +66,7 @@ export class MenuService {
 }
 
 
-// Fetch only available menu items
+
 async getAvailableMenu(): Promise<Menu[]> {
   return this.menuModel.find({ isAvailable: true }).exec();
 }

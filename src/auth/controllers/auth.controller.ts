@@ -1,11 +1,12 @@
 import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'; // ✅ import these
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'; 
 import { StaffService } from '../services/staff.service';
 import { LoginCustomerDto } from '../dto/login-customer.dto';
 import { LoginStaffDto } from '../dto/login-staff.dto';
 import { LoginCustomerService } from '../services/login-customer.service';
 
-@ApiTags('Auth') // ✅ this makes it appear as a "Auth" section in Swagger
+
+@ApiTags('Auth') 
 @Controller('auth')
 export class AuthController {
   constructor(

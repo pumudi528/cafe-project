@@ -7,7 +7,6 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, 
@@ -16,8 +15,11 @@ async function bootstrap() {
     }),
   );
 
-  
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://localhost:5173', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true, 
+  });
 
   
   const config = new DocumentBuilder()
@@ -27,19 +29,19 @@ async function bootstrap() {
     .addTag('Auth')
     .addTag('Customers')
     .addTag('Orders')
-    .addTag('Menu') // Add Menu tag so it shows in Swagger
+    .addTag('Menu')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  // ----- SERVER START -----
+  
   const port = process.env.PORT ?? 3000;
   await app.listen(port);
   console.log(`🚀 Application is running on: http://localhost:${port}`);
   console.log(`📘 Swagger Docs: http://localhost:${port}/api-docs`);
 
-  // ----- AUTO-ABANDON JOB FOR ORDERS -----
+ 
   const ordersService = app.get(OrdersService);
   setInterval(async () => {
     try {
@@ -48,7 +50,8 @@ async function bootstrap() {
     } catch (err) {
       console.error('❌ Error in auto-abandon job:', err);
     }
-  }, 60 * 1000); // every 1 minute
+  }, 60 * 1000); 
 }
 
 bootstrap();
+

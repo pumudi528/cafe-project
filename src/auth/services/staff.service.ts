@@ -1,4 +1,3 @@
-// src/auth/services/staff.service.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -9,7 +8,7 @@ export class StaffService {
   private readonly staffEmail = 'admin@example.com';
   private readonly staffPassword = '$2b$10$67API36OSSMsd9OFX0BFJeAtH.XbWBt5DioycaoODi2TEhc7hOT4m';
 
-  constructor(private readonly jwtService: JwtService) {}  // ✅ important: private readonly
+  constructor(private readonly jwtService: JwtService) {} 
 
   async login(loginDto: LoginStaffDto) {
     if (loginDto.email !== this.staffEmail)
@@ -20,7 +19,7 @@ export class StaffService {
       throw new UnauthorizedException('Invalid credentials');
 
     const payload = { sub: loginDto.email, role: 'staff' };
-    const token = this.jwtService.sign(payload);  // ✅ now recognized
+    const token = this.jwtService.sign(payload);  
 
     return { accessToken: token, staff: { email: this.staffEmail } };
   }

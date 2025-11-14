@@ -1,4 +1,3 @@
-// src/orders/dto/update-order-status.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty } from 'class-validator';
 

@@ -18,7 +18,7 @@ export class CreateMenuDto {
   @ApiProperty({ example: 10, description: 'Stock of the menu item' })
   @IsNumber()
   @IsPositive()
-  stock: number; // Now mandatory
+  stock: number; 
 }
 
 

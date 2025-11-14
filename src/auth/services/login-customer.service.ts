@@ -7,7 +7,7 @@ import { Customer } from '../schemas/customer.schema';
 import { LoginCustomerDto } from '../dto/login-customer.dto';
 
 @Injectable()
-export class LoginCustomerService {   // <- match import name
+export class LoginCustomerService {  
   constructor(
     @InjectModel(Customer.name) private customerModel: Model<Customer>,
     private jwtService: JwtService,

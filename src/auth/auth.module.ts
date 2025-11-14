@@ -1,4 +1,3 @@
-// src/auth/auth.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
@@ -14,11 +13,11 @@ import { AuthController } from './controllers/auth.controller';
   imports: [
     MongooseModule.forFeature([{ name: Customer.name, schema: CustomerSchema }]),
     JwtModule.register({
-      secret: 'your_jwt_secret', // move to .env in real projects
+      secret: 'your_jwt_secret', 
       signOptions: { expiresIn: '1d' },
     }),
   ],
-  controllers: [CustomerController, AuthController], // include AuthController
-  providers: [CustomerService, LoginCustomerService, StaffService], // include login services
+  controllers: [CustomerController, AuthController],
+  providers: [CustomerService, LoginCustomerService, StaffService],
 })
 export class AuthModule {}

@@ -13,11 +13,10 @@ export class OrdersService {
     @InjectModel(Menu.name) private menuModel: Model<MenuDocument>,
   ) {}
 
-  // Place a new order
   async create(createOrderDto: CreateOrderDto) {
     const { customerId, items } = createOrderDto;
 
-    // 1. Check active orders for customer
+  
     const activeOrdersCount = await this.orderModel.countDocuments({
       customerId,
       status: { $in: [OrderStatus.PLACED, OrderStatus.PREPARING, OrderStatus.READY] },
@@ -26,7 +25,6 @@ export class OrdersService {
       throw new BadRequestException('Customer has maximum 2 active orders');
     }
 
-    // 2. Check stock availability
     for (const item of items) {
       const menuItem = await this.menuModel.findById(item.menuId);
       if (!menuItem) throw new BadRequestException(`Menu item not found: ${item.menuId}`);
@@ -35,7 +33,7 @@ export class OrdersService {
       }
     }
 
-    // 3. Reduce stock for ordered items
+   
     for (const item of items) {
       await this.menuModel.findByIdAndUpdate(item.menuId, { $inc: { stock: -item.quantity } });
     }
@@ -44,14 +42,13 @@ export class OrdersService {
     return newOrder.save();
   }
 
-  // List active orders
+ 
   async findActive() {
     return this.orderModel
       .find({ status: { $in: [OrderStatus.PLACED, OrderStatus.PREPARING, OrderStatus.READY] } })
       .sort({ priority: -1, createdAt: -1 });
   }
 
-  // Update order status
   async updateStatus(id: string, updateStatusDto: UpdateOrderStatusDto) {
     const order = await this.orderModel.findById(id);
     if (!order) throw new NotFoundException('Order not found');
@@ -69,7 +66,6 @@ export class OrdersService {
       throw new BadRequestException(`Cannot change status from ${order.status} to ${updateStatusDto.status}`);
     }
 
-    // If cancelling or abandoning, restore stock
     if ([OrderStatus.CANCELLED, OrderStatus.ABANDONED].includes(updateStatusDto.status)) {
       for (const item of order.items) {
         await this.menuModel.findByIdAndUpdate(item.menuId, { $inc: { stock: item.quantity } });
@@ -83,7 +79,6 @@ export class OrdersService {
     return order.save();
   }
 
-  // Delete order and restore stock
   async delete(id: string) {
     const order = await this.orderModel.findById(id);
     if (!order) throw new NotFoundException('Order not found');
@@ -96,7 +91,6 @@ export class OrdersService {
     return { message: 'Order deleted and stock restored successfully' };
   }
 
-  // Auto-abandon Ready orders after 30 minutes
   async autoAbandon() {
     const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
     const readyOrders = await this.orderModel.find({
@@ -109,14 +103,14 @@ export class OrdersService {
       order.abandonedAt = new Date();
       await order.save();
 
-      // Restore stock
+     
       for (const item of order.items) {
         await this.menuModel.findByIdAndUpdate(item.menuId, { $inc: { stock: item.quantity } });
       }
     }
   }
 
-  // Fetch all orders for a specific user
+ 
   async getOrdersByUser(userId: string) {
     return this.orderModel
       .find({ customerId: userId })

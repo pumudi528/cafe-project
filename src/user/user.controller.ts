@@ -1,4 +1,3 @@
-// src/user/user.controller.ts
 import { Controller, Get, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 
@@ -8,7 +7,7 @@ export class UserController {
 
   @Get('landing/:userId')
   async getLanding(@Param('userId') userId: string) {
-    console.log('Received userId:', userId); // debug log
+    console.log('Received userId:', userId); 
     return this.userService.getLandingData(userId);
   }
 }

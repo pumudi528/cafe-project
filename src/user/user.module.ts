@@ -1,4 +1,3 @@
-// src/user/user.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserController } from './user.controller';
@@ -8,8 +7,8 @@ import { OrdersModule } from '../orders/orders.module';
 
 @Module({
   imports: [
-    MenuModule,      // import module that provides MenuService
-    OrdersModule,    // import module that provides OrdersService
+    MenuModule,      
+    OrdersModule,    
   ],
   controllers: [UserController],
   providers: [UserService],

@@ -1,7 +1,6 @@
-// src/orders/schemas/order.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { OrderStatus } from '../dto/update-order-status.dto'; // import enum
+import { OrderStatus } from '../dto/update-order-status.dto'; 
 
 export type OrderDocument = Order & Document & { createdAt: Date; updatedAt: Date };
 

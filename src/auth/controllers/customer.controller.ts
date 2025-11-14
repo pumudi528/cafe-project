@@ -1,9 +1,9 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'; // ✅ import
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger'; 
 import { CustomerService } from '../services/customer.service';
 import { CreateCustomerDto } from '../dto/create-customer.dto';
 
-@ApiTags('Customers') // ✅ new Swagger tag
+@ApiTags('Customers') 
 @Controller('customers')
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}

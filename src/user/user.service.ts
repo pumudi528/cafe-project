@@ -1,4 +1,3 @@
-// src/user/user.service.ts
 import { Injectable } from '@nestjs/common';
 import { MenuService } from '../menu/menu.service';
 import { OrdersService } from '../orders/orders.service';

@@ -1,4 +1,3 @@
-// src/dto/create-customer.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';

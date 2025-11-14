@@ -1,4 +1,3 @@
-// src/orders/dto/create-order.dto.ts
 import { IsNotEmpty, IsArray, ValidateNested, IsBoolean, IsPositive } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';

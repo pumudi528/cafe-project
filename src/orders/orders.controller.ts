@@ -1,4 +1,3 @@
-// src/orders/orders.controller.ts
 import { Controller, Post, Body, Get, Patch, Param, Delete } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { OrdersService } from './orders.service';
@@ -24,7 +23,6 @@ export class OrdersController {
   async findActive() {
     const orders = await this.ordersService.findActive();
 
-    // Map orders to include formatted timestamps
     return orders.map((order: OrderDocument) => {
       const obj = order.toObject();
       return {
